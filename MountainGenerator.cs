@@ -1,8 +1,9 @@
 using System;
+using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[ExecuteInEditMode]
+// [ExecuteInEditMode]
 public class MountainGenerator : MonoBehaviour
 {
     [Header("Mesh Settings")]
@@ -10,8 +11,11 @@ public class MountainGenerator : MonoBehaviour
     public int meshResolution = 2;
 
     [Header("Noise Settings")]
+    public Vector2 offset = new Vector2(0, 0);
     public float amplitude = 1;
     public float noiseScale = 1;
+    [Range(1, 8)]
+    public int exponent = 1;
     public int iterations = 1;
 
     public Vector3[] verts;
@@ -53,8 +57,8 @@ public class MountainGenerator : MonoBehaviour
             {
                 for (int x = 0; x < noise.GetLength(1); x++)
                 {
-                    float sample = Mathf.PerlinNoise(x / currentScale, y / currentScale);
-                    noise[y, x] += sample * currentAmplitude;
+                    float sample = Mathf.PerlinNoise(x / currentScale + offset.x, y / currentScale + offset.y);
+                    noise[y, x] += Mathf.Pow(sample, exponent) * currentAmplitude;
                 }
             }
         }

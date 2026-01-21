@@ -13,6 +13,8 @@ public enum SkierStatus {
 public class Skier {
     public string name;
     public SkierStatus status;
+    public int trailIndex;
+    public int pointIndex;
 
     public Skier(string name, SkierStatus status) {
         this.name = name;

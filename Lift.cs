@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Lift : MonoBehaviour {
+    public Object liftEnd;
     public int PASSENGERS = 4;
     public int LENGTH = 1000; // ft
     public int SPEED = 10; // ft/s
