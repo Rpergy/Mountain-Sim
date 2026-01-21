@@ -5,15 +5,62 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class MountainGenerator : MonoBehaviour
 {
+    [Header("Mesh Settings")]
     public float meshSize = 4;
     public int meshResolution = 2;
-    public float heightScale = 1;
-    public float widthScale = 1;
 
-    Vector3[] verts;
+    [Header("Noise Settings")]
+    public float amplitude = 1;
+    public float noiseScale = 1;
+    public int iterations = 1;
+
+    public Vector3[] verts;
     int[] tris;
 
+    float[,] noise;
+
+    void Start()
+    {
+        noise = new float[meshResolution + 1, meshResolution + 1];
+        GenerateNoise();
+    }
+
     void Update()
+    {
+        noise = new float[meshResolution + 1, meshResolution + 1];
+        GenerateNoise();
+        GenerateVertices();
+        GenerateTriangles();
+
+        Mesh mesh = new Mesh
+        {
+            vertices = verts,
+            triangles = tris
+        };
+
+        mesh.RecalculateNormals();
+        
+        GetComponent<MeshFilter>().mesh = mesh;
+    }
+
+    void GenerateNoise()
+    {
+        for (int i = 0; i < iterations; i++)
+        {
+            float currentScale = noiseScale / (float)Math.Pow(2, i + 1);
+            float currentAmplitude = amplitude / (float)Math.Pow(3, i + 1);
+            for (int y = 0; y < noise.GetLength(0); y++)
+            {
+                for (int x = 0; x < noise.GetLength(1); x++)
+                {
+                    float sample = Mathf.PerlinNoise(x / currentScale, y / currentScale);
+                    noise[y, x] += sample * currentAmplitude;
+                }
+            }
+        }
+    }
+
+    void GenerateVertices()
     {
         float distBetweenVertices = meshSize / meshResolution;
         int verticesPerRow = meshResolution + 1;
@@ -23,11 +70,16 @@ public class MountainGenerator : MonoBehaviour
         {
             for (int x = 0; x < verticesPerRow; x++)
             {
-                double randHeight = Math.Exp(-(Math.Pow((x * distBetweenVertices - meshSize / 2) / widthScale, 2) + Math.Pow((z * distBetweenVertices - meshSize / 2) / widthScale, 2)));
-                verts[vertexIndex] = new Vector3(x * distBetweenVertices, (float)randHeight * heightScale, z * distBetweenVertices);
+                float height = noise[z, x];
+                verts[vertexIndex] = new Vector3(x * distBetweenVertices, height, z * distBetweenVertices);
                 vertexIndex++;
             }
         }
+    }
+
+    void GenerateTriangles()
+    {
+        int verticesPerRow = meshResolution + 1;
 
         tris = new int[(meshResolution * meshResolution) * 6];
         int startingVert = verticesPerRow;
@@ -48,15 +100,5 @@ public class MountainGenerator : MonoBehaviour
             }
             startingVert += 1;
         }
-
-        Mesh mesh = new Mesh
-        {
-            vertices = verts,
-            triangles = tris
-        };
-
-        mesh.RecalculateNormals();
-        
-        GetComponent<MeshFilter>().mesh = mesh;
     }
 }
