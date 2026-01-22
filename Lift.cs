@@ -41,7 +41,7 @@ public class Lift : MonoBehaviour {
                 Skier nextRider = (Skier) queue.Dequeue();
                 nextRider.status = SkierStatus.Lift;
                 double timeLeft = LENGTH / SPEED;
-                lift.Add(new LiftRider(nextRider, timeLeft, chairNum));
+                lift.Add(new LiftRider(nextRider, timeLeft, chairNum, gameObject));
                 Debug.Log(nextRider.skierName + " entered lift on chair " + chairNum);
             }
 
@@ -55,10 +55,11 @@ public class Lift : MonoBehaviour {
         // Update rider timers
         foreach (LiftRider s in lift) {
             s.liftTime -= Time.deltaTime;
+            s.UpdateLiftPosition();
             // Remove from lift if timer elapsed
             if (s.liftTime < 0) { 
                 lift.Remove(s); 
-                s.skier.SetPosition(liftEnd.GetComponent<Transform>());
+                s.skier.SetPosition(liftEnd.GetComponent<Transform>().position);
                 s.skier.status = SkierStatus.Skiing;
                 s.skier.trailIndex = 0;
                 s.skier.pointIndex = 0;

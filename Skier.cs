@@ -1,7 +1,4 @@
 using UnityEngine;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Unity.VisualScripting;
 
 public enum SkierStatus {
@@ -33,9 +30,9 @@ public class Skier : MonoBehaviour
         return skierName;
     }
 
-    public void SetPosition(Transform transform)
+    public void SetPosition(Vector3 position)
     {
-        GetComponent<Transform>().position = transform.position;
+        GetComponent<Transform>().position = position;
     }
 
     void Start()
@@ -47,7 +44,6 @@ public class Skier : MonoBehaviour
     void Update()
     {
         if (status == SkierStatus.Skiing) UpdateSkiing();
-        if (status == SkierStatus.Lift) UpdateLift();
     }
 
     void UpdateSkiing()
@@ -73,10 +69,5 @@ public class Skier : MonoBehaviour
                 }
             }
         }
-    }
-
-    void UpdateLift()
-    {
-        
     }
 }
