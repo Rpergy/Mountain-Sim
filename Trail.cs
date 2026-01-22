@@ -6,6 +6,7 @@ public class Trail : MonoBehaviour
     public Vector3[] points;
     public Dictionary<int, Trail> connections;
     public float trailWidth;
+    public Object endLandmark;
 
     public Trail(Vector3[] points, Dictionary<int, Trail> connections, float trailWidth)
     {
