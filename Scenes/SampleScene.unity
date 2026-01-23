@@ -507,7 +507,7 @@ MonoBehaviour:
   trailManager: {fileID: 1562228188}
   skierName: Skier 1
   status: 0
-  speed: 1
+  speed: 2
   trailIndex: 0
   pointIndex: 0
   t: 0
@@ -583,6 +583,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &744873538
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 744873540}
+  - component: {fileID: 744873539}
+  m_Layer: 0
+  m_Name: Trail2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &744873539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744873538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2751a42ac11927b488b56801ed5742c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Trail
+  trailName: Trail 2
+  points:
+  - {x: -2.78, y: 0, z: -1.89}
+  - {x: -2.69, y: 0, z: 0.7}
+  - {x: -4, y: 0, z: 3}
+  trailWidth: 0
+  endLandmark: {fileID: 1400916981}
+  connectionTrails: []
+  connectionIndices: 
+--- !u!4 &744873540
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744873538}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -632,6 +685,116 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1243810520
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1243810524}
+  - component: {fileID: 1243810523}
+  - component: {fileID: 1243810522}
+  - component: {fileID: 1243810521}
+  m_Layer: 0
+  m_Name: Skier (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1243810521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1243810520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 610bd33ccafb4bf47806e8e68cfcb426, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Skier
+  trailManager: {fileID: 1562228188}
+  skierName: Skier 3
+  status: 0
+  speed: 2.4
+  trailIndex: 0
+  pointIndex: 0
+  t: 0
+--- !u!23 &1243810522
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1243810520}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1243810523
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1243810520}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1243810524
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1243810520}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.08, y: 0, z: -3.13}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1318277886
 GameObject:
   m_ObjectHideFlags: 0
@@ -666,7 +829,7 @@ MonoBehaviour:
   trailManager: {fileID: 1562228188}
   skierName: Skier 2
   status: 0
-  speed: 0.95
+  speed: 1.95
   trailIndex: 0
   pointIndex: 0
   t: 0
@@ -776,8 +939,8 @@ MonoBehaviour:
   liftEnd: {fileID: 187884921}
   PASSENGERS: 4
   LENGTH: 100
-  SPEED: 10
-  LOADING_SPEED: 5
+  SPEED: 20
+  LOADING_SPEED: 10
   NUM_CHAIRS: 100
 --- !u!23 &1400916984
 MeshRenderer:
@@ -1029,6 +1192,59 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
+--- !u!1 &1424665788
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1424665790}
+  - component: {fileID: 1424665789}
+  m_Layer: 0
+  m_Name: Trail3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1424665789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1424665788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2751a42ac11927b488b56801ed5742c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Trail
+  trailName: Trail 3
+  points:
+  - {x: -2.8, y: 0, z: -1.89}
+  - {x: -4.02, y: 0, z: -1.07}
+  - {x: -4, y: 0, z: 3}
+  trailWidth: 0
+  endLandmark: {fileID: 1400916981}
+  connectionTrails: []
+  connectionIndices: 
+--- !u!4 &1424665790
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1424665788}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1562228183
 GameObject:
   m_ObjectHideFlags: 0
@@ -1134,6 +1350,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TrailManager
   trails:
   - {fileID: 1899539104}
+  - {fileID: 744873538}
 --- !u!1 &1764726529
 GameObject:
   m_ObjectHideFlags: 0
@@ -1222,8 +1439,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de4f378c05403b4a84ab7939ebfab30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MountainGenerator
-  meshSize: 151.1
-  meshResolution: 74
+  meshSize: 165.3
+  meshResolution: 167
   offset: {x: 0, y: 0}
   amplitude: 117.2
   noiseScale: 42
@@ -6899,13 +7116,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2751a42ac11927b488b56801ed5742c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Trail
+  trailName: Trail 1
   points:
   - {x: 2, y: 0, z: -3}
   - {x: -2.78, y: 0, z: -1.89}
-  - {x: -4.06, y: 0, z: -0.33}
+  - {x: -3.39, y: 0, z: -0.21}
   - {x: -4, y: 0, z: 3}
   trailWidth: 0
   endLandmark: {fileID: 1400916981}
+  connectionTrails:
+  - {fileID: 744873538}
+  connectionIndices: 0100000001000000
 --- !u!4 &1899539106
 Transform:
   m_ObjectHideFlags: 0
@@ -6933,5 +7154,8 @@ SceneRoots:
   - {fileID: 1764726533}
   - {fileID: 1562228187}
   - {fileID: 1899539106}
+  - {fileID: 744873540}
+  - {fileID: 1424665790}
   - {fileID: 582449408}
   - {fileID: 1318277890}
+  - {fileID: 1243810524}

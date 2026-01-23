@@ -1,19 +1,18 @@
+using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Trail : MonoBehaviour
 {
+    public String trailName;
     public Vector3[] points;
-    public Dictionary<int, Trail> connections;
-    public float trailWidth;
-    public Object endLandmark;
 
-    public Trail(Vector3[] points, Dictionary<int, Trail> connections, float trailWidth)
-    {
-        this.points = points;
-        this.connections = connections;
-        this.trailWidth = trailWidth;
-    }
+    public float trailWidth;
+    public UnityEngine.Object endLandmark;
+
+    public Trail[] connectionTrails;
+    public int[] connectionIndices;
 
     void OnDrawGizmos()
     {
