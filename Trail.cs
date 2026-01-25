@@ -1,26 +1,33 @@
-using System;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
+[ExecuteAlways]
 public class Trail : MonoBehaviour
 {
-    public String trailName;
-    public Vector3[] points;
+    public TrailNode[] nodes;
 
-    public float trailWidth;
-    public UnityEngine.Object endLandmark;
-
-    public Trail[] connectionTrails;
-    public int[] connectionIndices;
+    public int GetNodeIndex(TrailNode node)
+    {
+        for (int i = 0; i < nodes.Length; i++)
+        {
+            if (node == nodes[i]) return i;
+        }
+        return -1;
+    } 
 
     void OnDrawGizmos()
     {
-        foreach (Vector3 p in points)
+        Gizmos.color = Color.white;
+        foreach (TrailNode n in nodes)
         {
-            Gizmos.DrawSphere(p, 0.2f);
+            Gizmos.DrawSphere(n.position, 0.2f);
         }
 
-        Gizmos.DrawLineStrip(points, false);
+        for (int i = 0; i < nodes.Length-1; i++)
+        {
+            Vector3 pos1 = nodes[i].position;
+            Vector3 pos2 = nodes[i+1].position;
+            Gizmos.DrawLine(pos1, pos2);
+        }
     }
 }

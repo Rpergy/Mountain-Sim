@@ -61,8 +61,6 @@ public class Lift : MonoBehaviour {
                 lift.Remove(s); 
                 s.skier.SetPosition(liftEnd.GetComponent<Transform>().position);
                 s.skier.status = SkierStatus.Skiing;
-                s.skier.trailIndex = 0;
-                s.skier.pointIndex = 0;
 
                 Debug.Log(s.skier.skierName + " exited the lift");
             }

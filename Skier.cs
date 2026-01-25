@@ -1,8 +1,5 @@
-using UnityEngine;
 using Unity.VisualScripting;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine;
 
 public enum SkierStatus {
     Skiing,
@@ -14,14 +11,14 @@ public enum SkierStatus {
 public class Skier : MonoBehaviour 
 {
     public TrailManager trailManager;
-
     public string skierName;
     public SkierStatus status;
     public float speed = 1.0f;
-    public int trailIndex;
-    public int pointIndex;
 
     public float t = 0.0f;
+
+    public int trailIndex;
+    public int pointIndex;
 
     public Skier(string name, SkierStatus status) {
         this.skierName = name;
@@ -38,12 +35,6 @@ public class Skier : MonoBehaviour
         GetComponent<Transform>().position = position;
     }
 
-    void Start()
-    {
-        Trail currentTrail = trailManager.trails[trailIndex].GetComponent<Trail>();
-        GetComponent<Transform>().position = currentTrail.points[pointIndex];
-    }
-
     void Update()
     {
         if (status == SkierStatus.Skiing) UpdateSkiing();
@@ -52,49 +43,26 @@ public class Skier : MonoBehaviour
     void UpdateSkiing()
     {
         Trail currentTrail = trailManager.trails[trailIndex].GetComponent<Trail>();
-        if (t < 1.0f)
+
+        Vector3 start = currentTrail.nodes[pointIndex].position;
+        Vector3 end = currentTrail.nodes[pointIndex + 1].position;
+        t += Time.deltaTime / Vector3.Distance(start, end) * speed;
+        if (t < 1.0)
         {
-            // Calculate the new position
-            Vector3 startPos = currentTrail.points[pointIndex];
-            Vector3 shift = new Vector3(currentTrail.trailWidth * (float)Math.Sin(t * 4 * Math.PI), 0, 0);
-            Vector3 endPos = currentTrail.points[pointIndex + 1] + shift;
-            Vector3 newPosition = Vector3.Lerp(startPos, endPos, t);
-            GetComponent<Transform>().position = newPosition;
-            t += Time.deltaTime * speed / Vector3.Distance(currentTrail.points[pointIndex], currentTrail.points[pointIndex+1]);
+            Vector3 newPos = Vector3.Lerp(start, end, t);
+            gameObject.GetComponent<Transform>().position = newPos;
         }
-        else // Reach trail intersection point
+        else
         {
-            t = 0; // Reset the lerp timer
+            t = 0;
             pointIndex++;
 
-            ArrayList intersections = new ArrayList();
-
-            for (int i = 0; i < currentTrail.connectionIndices.Length; i++)
+            TrailNode currentNode = currentTrail.nodes[pointIndex];
+            TrailNode newTrailNode = currentNode.choosePath();
+            if (newTrailNode != null)
             {
-                if (currentTrail.connectionIndices[i] == pointIndex)
-                {
-                    intersections.Add(currentTrail.connectionTrails[i]);
-                }
-            }
-
-            Boolean stayOnTrail = (UnityEngine.Random.Range(0.0f, 1.0f) < 0.5) ? true : false;
-
-            if (!stayOnTrail && intersections.Count > 0)
-            {
-                int randTrail = UnityEngine.Random.Range(0, intersections.Count);
-                int randTrailIndex = trailManager.GetTrailIndex((Trail)intersections[randTrail]);
-                
-                trailIndex = randTrailIndex;
-                pointIndex = 0;
-            }
-
-            // Once we've reached the end of the trail, check if there are any landmarks to enter
-            if (pointIndex == currentTrail.points.Length-1 && currentTrail.endLandmark != null)
-            {
-                if (currentTrail.endLandmark.GetComponent<Lift>() != null)
-                {
-                    currentTrail.endLandmark.GetComponent<Lift>().queueSkier(this);
-                }
+                trailIndex = trailManager.getTrailIndex(newTrailNode.GetTrail());
+                pointIndex = newTrailNode.GetTrail().GetNodeIndex(newTrailNode);
             }
         }
     }
