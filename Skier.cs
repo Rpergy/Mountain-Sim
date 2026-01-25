@@ -10,7 +10,6 @@ public enum SkierStatus {
 
 public class Skier : MonoBehaviour 
 {
-    public TrailManager trailManager;
     public string skierName;
     public SkierStatus status;
     public float speed = 1.0f;
@@ -30,6 +29,11 @@ public class Skier : MonoBehaviour
         return skierName;
     }
 
+    void Start()
+    {
+        gameObject.GetComponent<Renderer>().material.color = new Color(UnityEngine.Random.Range(0.0f, 1.0f), UnityEngine.Random.Range(0.0f, 1.0f), UnityEngine.Random.Range(0.0f, 1.0f));
+    }
+
     public void SetPosition(Vector3 position)
     {
         GetComponent<Transform>().position = position;
@@ -42,7 +46,7 @@ public class Skier : MonoBehaviour
 
     void UpdateSkiing()
     {
-        Trail currentTrail = trailManager.trails[trailIndex].GetComponent<Trail>();
+        Trail currentTrail = TrailManager.trails[trailIndex].GetComponent<Trail>();
 
         Vector3 start = currentTrail.nodes[pointIndex].position;
         Vector3 end = currentTrail.nodes[pointIndex + 1].position;
@@ -58,12 +62,7 @@ public class Skier : MonoBehaviour
             pointIndex++;
 
             TrailNode currentNode = currentTrail.nodes[pointIndex];
-            TrailNode newTrailNode = currentNode.choosePath();
-            if (newTrailNode != null)
-            {
-                trailIndex = trailManager.getTrailIndex(newTrailNode.GetTrail());
-                pointIndex = newTrailNode.GetTrail().GetNodeIndex(newTrailNode);
-            }
+            currentNode.choosePath(this);
         }
     }
 }

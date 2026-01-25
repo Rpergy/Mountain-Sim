@@ -2,13 +2,14 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEngine.UIElements;
 
 public class Lift : MonoBehaviour {
-    public Object liftEnd;
+    public LiftNode liftEnd;
     public int PASSENGERS = 4;
-    public int LENGTH = 1000; // ft
-    public int SPEED = 10; // ft/s
-    public double LOADING_SPEED = 5.0; // seconds per chair
+    public float LENGTH = 0; // ft
+    public float SPEED = 10; // ft/s
+    public float LOADING_SPEED = 5.0f; // seconds per chair
     public int NUM_CHAIRS = 100;
 
     Queue<Skier> queue;
@@ -19,6 +20,8 @@ public class Lift : MonoBehaviour {
 
     public void queueSkier(Skier s) {
         s.status = SkierStatus.Queued;
+        s.trailIndex = -1;
+        s.pointIndex = -1;
         queue.Enqueue(s);
         Debug.Log(s.skierName + " entered the queue");
     }
@@ -26,6 +29,8 @@ public class Lift : MonoBehaviour {
     void Start() {
         queue = new Queue<Skier>();
         lift = new ArrayList();
+
+        LENGTH = Vector3.Distance(liftEnd.position, gameObject.GetComponent<LiftNode>().position);
 
         boardTimer = LOADING_SPEED;
     }
@@ -59,8 +64,9 @@ public class Lift : MonoBehaviour {
             // Remove from lift if timer elapsed
             if (s.liftTime < 0) { 
                 lift.Remove(s); 
-                s.skier.SetPosition(liftEnd.GetComponent<Transform>().position);
+                s.skier.SetPosition(liftEnd.position);
                 s.skier.status = SkierStatus.Skiing;
+                liftEnd.choosePath(s.skier);
 
                 Debug.Log(s.skier.skierName + " exited the lift");
             }
