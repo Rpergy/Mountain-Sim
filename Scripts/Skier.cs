@@ -10,6 +10,7 @@ public enum SkierStatus {
 
 public class Skier : MonoBehaviour 
 {
+    public TrailManager trailManager;
     public string skierName;
     public SkierStatus status;
     public float speed = 1.0f;
@@ -46,7 +47,7 @@ public class Skier : MonoBehaviour
 
     void UpdateSkiing()
     {
-        Trail currentTrail = TrailManager.trails[trailIndex].GetComponent<Trail>();
+        Trail currentTrail = trailManager.trails[trailIndex].GetComponent<Trail>();
 
         Vector3 start = currentTrail.nodes[pointIndex].position;
         Vector3 end = currentTrail.nodes[pointIndex + 1].position;

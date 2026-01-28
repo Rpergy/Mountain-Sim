@@ -37,12 +37,12 @@ public class TrailNode : MonoBehaviour
 
         if (trailConnections.Length > 0) {
             Boolean switchTrails = (UnityEngine.Random.Range(0.0f, 1.0f) > 0.5) ? true : false;
-            Boolean lastNode = GetTrail().GetNodeIndex(this) == GetTrail().nodes.Length - 1;
+            Boolean lastNode = GetTrail().GetNodeIndex(this) == GetTrail().nodes.Count - 1;
             if (switchTrails || lastNode)
             {
                 int randTrailIndex = UnityEngine.Random.Range(0, trailConnections.Length);
                 TrailNode connectingNode = trailConnections[randTrailIndex];
-                s.trailIndex = TrailManager.GetTrailIndex(connectingNode.GetTrail());
+                s.trailIndex = trailManager.GetTrailIndex(connectingNode.GetTrail());
                 s.pointIndex = connectingNode.GetTrail().GetNodeIndex(connectingNode);
             }
         }

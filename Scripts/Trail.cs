@@ -1,14 +1,20 @@
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
 [ExecuteAlways]
 public class Trail : MonoBehaviour
 {
-    public TrailNode[] nodes;
+    public List<TrailNode> nodes;
+
+    void Awake()
+    {
+        nodes = new List<TrailNode>();
+    }
 
     public int GetNodeIndex(TrailNode node)
     {
-        for (int i = 0; i < nodes.Length; i++)
+        for (int i = 0; i < nodes.Count; i++)
         {
             if (node == nodes[i]) return i;
         }
@@ -17,13 +23,13 @@ public class Trail : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.white;
+        Gizmos.color = Color.black;
         foreach (TrailNode n in nodes)
         {
             Gizmos.DrawSphere(n.position, 0.2f);
         }
 
-        for (int i = 0; i < nodes.Length-1; i++)
+        for (int i = 0; i < nodes.Count-1; i++)
         {
             Vector3 pos1 = nodes[i].position;
             Vector3 pos2 = nodes[i+1].position;

@@ -20,7 +20,7 @@ public class LiftNode : MonoBehaviour
         {
             int randTrailIndex = UnityEngine.Random.Range(0, trailConnections.Length);
             TrailNode newTrail = trailConnections[randTrailIndex];
-            s.trailIndex = TrailManager.GetTrailIndex(newTrail.GetTrail());
+            s.trailIndex = trailManager.GetTrailIndex(newTrail.GetTrail());
             s.pointIndex = newTrail.GetTrail().GetNodeIndex(newTrail);
         }
     }
