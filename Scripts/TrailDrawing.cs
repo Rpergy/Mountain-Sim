@@ -22,14 +22,14 @@ public class TrailDrawing : MonoBehaviour
         trailNodes = new List<Vector3>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         var mouse = Mouse.current;
 
         mousePos = mouse.position.ReadValue();
         if (mouse.leftButton.isPressed)
             SendTrailRaycast();
-        if (mouse.leftButton.wasReleasedThisFrame) { // Done with trail
+        if (mouse.leftButton.wasReleasedThisFrame && trailNodes.Count > 1) { // Done with trail
             mountain.GetComponent<TrailManager>().CreateNewTrail(trailNodes);
             trailNodes = new List<Vector3>();
         }
