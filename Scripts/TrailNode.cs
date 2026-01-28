@@ -16,9 +16,10 @@ public class TrailNode : MonoBehaviour
 
     void Update()
     {
-        Vector3 newPos = new Vector3(gameObject.GetComponent<Transform>().position.x, trailManager.GetMeshHeight(position), gameObject.GetComponent<Transform>().position.z);
-        gameObject.GetComponent<Transform>().position = newPos;
-        position = newPos;
+        // Vector3 newPos = new Vector3(gameObject.GetComponent<Transform>().position.x, trailManager.GetMeshHeight(position), gameObject.GetComponent<Transform>().position.z);
+        // gameObject.GetComponent<Transform>().position = newPos;
+        // position = newPos;
+        position = GetComponent<Transform>().position;
     }
 
     public void choosePath(Skier s)

@@ -3,7 +3,7 @@ using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
 
-// [ExecuteInEditMode]
+[ExecuteAlways]
 public class MountainGenerator : MonoBehaviour
 {
     [Header("Mesh Settings")]
@@ -14,6 +14,7 @@ public class MountainGenerator : MonoBehaviour
     public Vector2 offset = new Vector2(0, 0);
     public float amplitude = 1;
     public float noiseScale = 1;
+
     [Range(1, 8)]
     public int exponent = 1;
     public int iterations = 1;
@@ -29,7 +30,7 @@ public class MountainGenerator : MonoBehaviour
         GenerateNoise();
     }
 
-    void Update()
+    void OnValidate()
     {
         noise = new float[meshResolution + 1, meshResolution + 1];
         GenerateNoise();
@@ -43,8 +44,13 @@ public class MountainGenerator : MonoBehaviour
         };
 
         mesh.RecalculateNormals();
+        mesh.RecalculateBounds();
         
         GetComponent<MeshFilter>().mesh = mesh;
+
+        MeshCollider collider = GetComponent<MeshCollider>();
+        collider.sharedMesh = null;
+        collider.sharedMesh = mesh;
     }
 
     void GenerateNoise()
